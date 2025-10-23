@@ -10,7 +10,21 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: "price_1SIvD2PlqGjudXY97nbBjSVt",
+          adjustable_quantity: {
+            enabled: true,
+            maximum: 10,
+            minimum: 1,
+          },
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "Super Mario World",
+              images: [
+                "https://cdn.pixabay.com/photo/2016/07/30/21/38/mario-1558068_1280.jpg",
+              ],
+            },
+            unit_amount: 4500,
+          },
           quantity: 1,
         },
       ],
